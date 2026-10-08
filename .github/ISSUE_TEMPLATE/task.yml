@@ -1,0 +1,35 @@
+name: Task
+description: A small piece of work that can be finished in one pull request.
+title: "[Task] "
+labels: ["type:task"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Keep the task small. If it takes more than a day, split it into smaller issues.
+        Do not attach or paste confidential or restricted data (CAD/STEP models, binary files, screenshots, logs, credentials, personal data, or anything derived from them).
+  - type: textarea
+    id: goal
+    attributes:
+      label: Goal
+      description: What should be different when this is done?
+      placeholder: Show the entity tree before any geometry is generated.
+    validations:
+      required: true
+  - type: textarea
+    id: done
+    attributes:
+      label: Done when
+      description: A short checklist. Each item should be easy to check.
+      value: |
+        - [ ]
+        - [ ]
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes
+      description: Optional. Links, ideas, or files that may be involved.
+    validations:
+      required: false
