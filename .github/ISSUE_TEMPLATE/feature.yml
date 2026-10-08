@@ -1,0 +1,55 @@
+name: Feature
+description: Suggest a new capability or improvement.
+title: "[Feature] "
+labels: ["type:feature"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        CADYomi is an inspection tool first, not a renderer. Prefer structure, properties, and plugins.
+        Do not attach or paste confidential or restricted data (CAD/STEP models, binary files, screenshots, logs, credentials, personal data, or anything derived from them).
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What is hard or missing today?
+    validations:
+      required: true
+  - type: textarea
+    id: idea
+    attributes:
+      label: Idea
+      description: What would you like to happen? Keep it simple.
+    validations:
+      required: true
+  - type: textarea
+    id: done
+    attributes:
+      label: Done when
+      description: A short checklist. Each item should be easy to check.
+      value: |
+        - [ ]
+        - [ ]
+    validations:
+      required: true
+  - type: dropdown
+    id: milestone
+    attributes:
+      label: Related milestone area
+      options:
+        - STEP import and parsing
+        - Entity tree
+        - Property inspection
+        - Plugin architecture
+        - Visual plugin
+        - Viewer controls
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes
+      description: Optional. Alternatives you considered or related links.
+    validations:
+      required: false

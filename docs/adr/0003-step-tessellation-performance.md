@@ -64,4 +64,4 @@ The replacement must support cancellation, progress, stable entity IDs, explicit
 
 ## Follow-up
 
-See [TODO: progressive tessellation](../TODO.md) for the implementation backlog.
+See [Lazy node-level geometry loading](https://github.com/sato-toma/cad-yomi/issues/17) for the implementation backlog.
