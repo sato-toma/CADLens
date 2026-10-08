@@ -183,6 +183,38 @@ button {
     font-weight: 700;
 }
 
+.entity-search-wrap {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 20px;
+    border-bottom: 1px solid #2a3344;
+}
+
+.entity-search {
+    width: 100%;
+    min-width: 0;
+    min-height: 44px;
+    padding: 8px 12px;
+    border: 1px solid #3c4a61;
+    border-radius: 8px;
+    outline: none;
+    background: #0a101c;
+    color: #edf5ff;
+    font: inherit;
+}
+
+.entity-search:focus {
+    border-color: #7f9bc3;
+    box-shadow: 0 0 0 2px rgb(127 155 195 / 25%);
+}
+
+.entity-search-count {
+    flex: 0 0 auto;
+    color: #9fb6d8;
+    font-size: 0.8rem;
+}
+
 .entity-table-wrap {
     overflow: auto;
 }

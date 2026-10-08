@@ -28,6 +28,7 @@ function App() {
     const [selectedEntity, setSelectedEntity] = useState<StepEntity | null>(
         null,
     );
+    const [entityQuery, setEntityQuery] = useState("");
     const [selectedMeshes, setSelectedMeshes] = useState<StepMeshData[]>([]);
     const [selectedGeometryLoading, setSelectedGeometryLoading] =
         useState(false);
@@ -41,6 +42,15 @@ function App() {
 
     const geometryBackend = geometryBackendRef.current;
     const inspection = geometrySession?.inspection ?? null;
+    const normalizedEntityQuery = entityQuery.trim().toLowerCase();
+    const visibleEntities =
+        inspection?.entities.filter((entity) =>
+            [entity.name, entity.type, entity.id]
+                .filter(Boolean)
+                .some((value) =>
+                    value?.toLowerCase().includes(normalizedEntityQuery),
+                ),
+        ) ?? [];
 
     useEffect(() => {
         if (!viewerRef.current) {
@@ -218,6 +228,7 @@ function App() {
         geometrySessionRef.current = null;
         setGeometrySession(null);
         setSelectedEntity(null);
+        setEntityQuery("");
         setSelectedMeshes([]);
         setRenderReady(false);
 
@@ -317,6 +328,27 @@ function App() {
                             )}
                         </div>
 
+                        {inspection && (
+                            <div className="entity-search-wrap">
+                                <input
+                                    aria-label="Search entities by name, type, or ID"
+                                    className="entity-search"
+                                    type="search"
+                                    placeholder="Search name, type, or ID"
+                                    value={entityQuery}
+                                    onChange={(event) =>
+                                        setEntityQuery(event.target.value)
+                                    }
+                                />
+                                {normalizedEntityQuery && (
+                                    <span className="entity-search-count">
+                                        {visibleEntities.length} /{" "}
+                                        {inspection.entities.length}
+                                    </span>
+                                )}
+                            </div>
+                        )}
+
                         {error && (
                             <p className="message error-message">{error}</p>
                         )}
@@ -329,56 +361,64 @@ function App() {
                                 </span>
                             </div>
                         )}
-                        {inspection && (
-                            <div className="entity-table-wrap">
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Entity</th>
-                                            <th scope="col">Entity type</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {inspection.entities.map((entity) => (
-                                            <tr key={entity.id}>
-                                                <td>
-                                                    <button
-                                                        className={`entity-row ${selectedEntity?.id === entity.id ? "selected" : ""}`}
-                                                        type="button"
-                                                        onClick={() =>
-                                                            setSelectedEntity(
-                                                                entity,
-                                                            )
-                                                        }
-                                                    >
-                                                        <span
-                                                            className="entity-name"
-                                                            style={{
-                                                                paddingLeft: `${(entity.depth ?? 0) * 18}px`,
-                                                            }}
-                                                        >
-                                                            <span className="entity-folder-mark">
-                                                                {entity.type.includes(
-                                                                    "ASSEMBLY",
-                                                                )
-                                                                    ? ">"
-                                                                    : "-"}
-                                                            </span>
-                                                            {entity.name ??
-                                                                entity.type}
-                                                        </span>
-                                                        <span className="entity-id">
-                                                            #{entity.id}
-                                                        </span>
-                                                    </button>
-                                                </td>
-                                                <td>{entity.type}</td>
+                        {inspection &&
+                            (visibleEntities.length > 0 ? (
+                                <div className="entity-table-wrap">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Entity</th>
+                                                <th scope="col">Entity type</th>
                                             </tr>
-                                        ))}
-                                    </tbody>
-                                </table>
-                            </div>
-                        )}
+                                        </thead>
+                                        <tbody>
+                                            {visibleEntities.map((entity) => (
+                                                <tr key={entity.id}>
+                                                    <td>
+                                                        <button
+                                                            className={`entity-row ${selectedEntity?.id === entity.id ? "selected" : ""}`}
+                                                            type="button"
+                                                            onClick={() =>
+                                                                setSelectedEntity(
+                                                                    entity,
+                                                                )
+                                                            }
+                                                        >
+                                                            <span
+                                                                className="entity-name"
+                                                                style={{
+                                                                    paddingLeft: `${(entity.depth ?? 0) * 18}px`,
+                                                                }}
+                                                            >
+                                                                <span className="entity-folder-mark">
+                                                                    {entity.type.includes(
+                                                                        "ASSEMBLY",
+                                                                    )
+                                                                        ? ">"
+                                                                        : "-"}
+                                                                </span>
+                                                                {entity.name ??
+                                                                    entity.type}
+                                                            </span>
+                                                            <span className="entity-id">
+                                                                #{entity.id}
+                                                            </span>
+                                                        </button>
+                                                    </td>
+                                                    <td>{entity.type}</td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            ) : (
+                                <div className="empty-state">
+                                    <strong>No matching entities</strong>
+                                    <span>
+                                        Try another name, type, or entity ID.
+                                    </span>
+                                </div>
+                            ))}
                     </section>
 
                     <aside className="panel property-panel">

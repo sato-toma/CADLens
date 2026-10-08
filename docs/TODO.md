@@ -1,5 +1,20 @@
 # CADYomi TODO
 
+## Near-term UX improvements
+
+- [x] Filter the loaded node list by name, entity type, or ID to make large models easier to inspect.
+
+## Node-level workflow and decoration
+
+- [ ] Define node-level export/import behavior for STEP entities and assembly subtrees, including whether hierarchy, properties, colors, and placement are preserved.
+- [ ] Export a selected node or subtree from the loaded STEP document without exporting unrelated nodes.
+- [ ] Import an exported node or subtree and add it to the current document tree.
+- [ ] Define a plugin-facing decoration interface that targets a selected node or subtree without coupling decoration logic to the application core.
+- [ ] Make node selection and decoration usable on mobile browsers, including touch-friendly controls and clear feedback for the selected target.
+- [ ] Expose supported node and decoration operations through a stable application API that can later be wrapped as MCP tools for natural-language LLM use.
+- [ ] Define API operation schemas, validation, and target scoping so automated operations can only affect explicitly selected or identified nodes.
+- [ ] Add tests for node/subtree round trips, preservation of supported metadata, mobile interaction, and API operation validation.
+
 ## Progressive STEP geometry
 
 - [ ] Add an OCCT/XDE document-backed WASM bridge to replace eager `ReadStepFile()` import.
