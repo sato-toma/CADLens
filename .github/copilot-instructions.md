@@ -63,7 +63,7 @@ Work from one GitHub issue at a time. Keep each change small enough for one pull
 5. **Check the work.** Run `npm run typecheck`, `npm run lint`, `npm test`, and `npm run build`. Report any check that was skipped or failed.
 6. **Commit in English.** Use a short, clear message. Reference the issue, for example `Add entity search (#12)`.
 7. **Open a pull request.** Fill in the pull request template. Use `Closes #<issue-number>` so the issue closes when merged. Do not merge it yourself unless the user asks.
-8. **Update the notes.** If `docs/TODO.md` lists the work, tick it or link the issue. Do not duplicate details that live in the issue.
+8. **Update the notes.** Keep progress in the issue, not in separate TODO files. If the work changes a decision recorded in `docs/adr/`, update or add an ADR.
 
 ### Writing new issues
 
