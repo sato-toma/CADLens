@@ -3,6 +3,14 @@
 ## Near-term UX improvements
 
 - [x] Filter the loaded node list by name, entity type, or ID to make large models easier to inspect.
+- [ ] Show the file structure and properties before generating any render geometry.
+- [ ] Keep STEP record scanning off the UI thread so large-file indexing does not block interaction.
+- [ ] Remove eager full-model tessellation from the active `ReadStepFile()` import path.
+- [ ] Tessellate a geometry node only when selected; for an assembly, tessellate only the required descendants.
+- [ ] Keep the parsed STEP document available in a long-lived worker so bounds and selected-node geometry can be requested on demand.
+- [ ] Avoid transferring or retaining mesh buffers for nodes that are not displayed.
+- [ ] Add mouse and touch camera navigation for rotate, pan, and zoom.
+- [ ] Separate navigation actions from input bindings so mouse buttons, wheel, and touch gestures can be remapped and saved as user settings.
 
 ## Node-level workflow and decoration
 
